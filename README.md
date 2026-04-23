@@ -153,7 +153,7 @@ streamlit run app.py
 - Analytics Dashboard
 - Suggestions Panel
 
-### 1️⃣ Home Dashboard
+### 1. Home Dashboard
 
 ![Home Dashboard](Stress_Prediction/pg1.png)
 
