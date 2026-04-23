@@ -153,43 +153,45 @@ streamlit run app.py
 - Analytics Dashboard
 - Suggestions Panel
 
+---
+
 ### 1. Home Dashboard
 
 ![Home Dashboard](Stress_Prediction/pg1.png)
 
 ---
 
-### 2️⃣ Moderate Stress Prediction
+### 2️. Moderate Stress Prediction
 
 ![Moderate Stress](Stress_Prediction/pg2.png)
 
 ---
 
-### 3️⃣ Low Stress Prediction
+### 3️. Low Stress Prediction
 
 ![Low Stress](Stress_Prediction/pg3.png)
 
 ---
 
-### 4️⃣ High Stress Gauge Analysis
+### 4️. High Stress Gauge Analysis
 
 ![High Stress Gauge](Stress_Prediction/pg4.png)
 
 ---
 
-### 5️⃣ Lifestyle Input Controls
+### 5️. Lifestyle Input Controls
 
 ![Lifestyle Inputs](Stress_Prediction/pg5.png)
 
 ---
 
-### 6️⃣ Analytics & Charts Section
+### 6️. Analytics & Charts Section
 
 ![Analytics Charts](Stress_Prediction/pg6.png)
 
 ---
 
-### 7️⃣ Suggestions & Recommendations Panel
+### 7️. Suggestions & Recommendations Panel
 
 ![Suggestions Panel](Stress_Prediction/pg7.png)
 
