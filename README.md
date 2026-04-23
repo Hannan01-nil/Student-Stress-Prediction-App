@@ -119,10 +119,7 @@ Student-Stress-App/
 ├── requirements.txt
 ├── README.md
 ├── student_lifestyle_dataset_Final.csv
-├── premium_brain_logo.svg
-├── hide_streamlit.css
 ├── saved_model.pkl
-└── TODO.md
 ```
 
 ## ⚙️ Installation Guide
