@@ -1,4 +1,4 @@
-# 🎓 Student Stress Prediction System
+### 🎓 Stressiq - Student Stress Prediction AI
 
 <p align="center">
   <b>AI-Powered Wellness Dashboard for Predicting Student Stress Levels</b><br>
