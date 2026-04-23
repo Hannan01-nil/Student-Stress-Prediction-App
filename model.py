@@ -10,7 +10,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder, StandardScaler
 
 try:
     from xgboost import XGBClassifier, XGBRegressor
@@ -258,6 +258,16 @@ def train_model(dataset_path, model_path):
 
     problem_type = infer_problem_type(target_series)
 
+    label_encoder = None
+    if problem_type == "classification" and not pd.api.types.is_numeric_dtype(target_series):
+        label_encoder = LabelEncoder()
+        label_encoder.fit(target_series.unique())
+        target_series = pd.Series(
+            label_encoder.transform(target_series),
+            index=target_series.index,
+            name=target_series.name
+        )
+
     stratify = target_series if problem_type == "classification" else None
     x_train, x_valid, y_train, y_valid = train_test_split(
         feature_df,
@@ -297,7 +307,8 @@ def train_model(dataset_path, model_path):
         "metrics": best_metrics,
         "target_min": float(target_series.min()) if pd.api.types.is_numeric_dtype(target_series) else None,
         "target_max": float(target_series.max()) if pd.api.types.is_numeric_dtype(target_series) else None,
-        "classes": [str(value) for value in getattr(best_model, "classes_", [])] or sorted(target_series.astype(str).unique()),
+        "label_encoder": label_encoder,
+        "classes": [str(c) for c in (label_encoder.classes_ if label_encoder else sorted(target_series.astype(str).unique()))],
     }
     joblib.dump(artifact, model_path)
     return artifact
@@ -417,14 +428,18 @@ def predict_from_ui_inputs(ui_inputs, artifact):
     problem_type = artifact["problem_type"]
 
     if problem_type == "classification":
-        predicted_label = str(model.predict(feature_frame)[0])
-        if hasattr(model, "predict_proba"):
-            probability_values = model.predict_proba(feature_frame)[0]
-            class_labels = [str(label) for label in model.classes_]
-            probabilities = {
-                label: float(probability)
-                for label, probability in zip(class_labels, probability_values)
-            }
+        raw_predictions = model.predict(feature_frame)
+        raw_probs = model.predict_proba(feature_frame)[0] if hasattr(model, "predict_proba") else None
+        
+        if artifact.get("label_encoder") is not None:
+            predicted_label = artifact["label_encoder"].inverse_transform(raw_predictions)[0]
+            class_labels = [str(c) for c in artifact["label_encoder"].classes_]
+        else:
+            predicted_label = str(raw_predictions[0])
+            class_labels = artifact.get("classes", [str(label) for label in getattr(model, "classes_", [])])
+        
+        if raw_probs is not None:
+            probabilities = {label: float(prob) for label, prob in zip(class_labels, raw_probs)}
         else:
             probabilities = {predicted_label: 1.0}
 
