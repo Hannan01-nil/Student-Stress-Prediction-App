@@ -152,6 +152,12 @@ streamlit run app.py
 
 ---
 
+## 🚀 DEMO URL
+
+https://stressiq.streamlit.app/
+
+---
+
 ### 1. Home Dashboard
 
 ![Home Dashboard](Stress_Prediction/pg1.png)
