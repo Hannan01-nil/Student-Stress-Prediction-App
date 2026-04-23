@@ -143,17 +143,6 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
-## 🌐 Deployment (Streamlit Cloud)
-
-1. Push project to GitHub
-2. Visit: https://share.streamlit.io
-3. Connect GitHub repository
-4. Select:
-   - Repository: Student-Stress-App
-   - Branch: main
-   - Main File: app.py
-5. Click **Deploy**
-
 ## 📷 UI Preview
 
 **Dashboard Includes:**
