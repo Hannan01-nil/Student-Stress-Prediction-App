@@ -155,7 +155,7 @@ streamlit run app.py
 ## 🚀 DEMO URL
 
 https://stressiq.streamlit.app/
-
+> 📱 This application is currently optimized for desktop/laptop screens for the best experience.
 ---
 
 ### 1. Home Dashboard
